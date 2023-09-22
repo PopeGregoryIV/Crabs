@@ -11,3 +11,14 @@ Dependencys: no dependecys
 call: capt = getCapt 50 will generate a matrix of capt size 50 
 
 sidee effects: none 
+
+Function: captainGraphics: matrix-> scene 
+
+purpose: this function takes points from a matrix and plots them to create graphics for the chaptain character. 
+
+dependecys: getCapt, drawLine
+
+side effects: draws a line between points in the matrix
+
+
+
