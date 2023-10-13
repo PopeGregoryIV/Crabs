@@ -1,4 +1,4 @@
-function captainGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt)
+function captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt)
 % In the future, this function will draw the captain at the given
 % position (xCapt , yCapt) , with heading thetaCapt.
 % For now, it draws the captain at the (0, 0) with 0 heading.
@@ -14,7 +14,7 @@ captRotated = R*capt;
 
 % TODO : Shift the captain from (0 , 0) to (xCapt , yCapt)
 T = getTranslation(xCapt,yCapt);
-capt = T*captRotated;
+capt = T*capt;
 
 % Extract the captain points from the captain matrix capt.
 pt1=capt( : , 1);
@@ -34,18 +34,18 @@ pt14=capt( : , 14);
 pt15=capt( : , 15);
 pt16=capt( : , 16);
 % Draw the captain and set the return vector of graphics handles.
-captainGraphics(1) = drawLine(pt1 , pt2 , "k");
-captainGraphics(2) = drawLine(pt2 , pt3 , "k");
-captainGraphics(3) = drawLine(pt2 , pt5 , "k");
-captainGraphics(4) = drawLine(pt4 , pt5 , "k");
-captainGraphics(5) = drawLine(pt5 , pt6 , "k");
-captainGraphics(6) = drawLine(pt6 , pt1 , "k");
-captainGraphics(7) = drawLine(pt7 , pt8 , "k");
-captainGraphics(8) = drawLine(pt8 , pt9 , "k");
-captainGraphics(9) = drawLine(pt9 , pt10 , "k");
-captainGraphics(10) = drawLine(pt1 , pt11 , "k");
-captainGraphics(11) = drawLine(pt6 , pt12 , "k");
-captainGraphics(12) = drawLine(pt13 , pt14 , "k");
-captainGraphics(13) = drawLine(pt15 , pt16 , "k");
+captGraphics(1) = drawLine(pt1 , pt2 , "k");
+captGraphics(2) = drawLine(pt2 , pt3 , "k");
+captGraphics(3) = drawLine(pt2 , pt5 , "k");
+captGraphics(4) = drawLine(pt4 , pt5 , "k");
+captGraphics(5) = drawLine(pt5 , pt6 , "k");
+captGraphics(6) = drawLine(pt6 , pt1 , "k");
+captGraphics(7) = drawLine(pt7 , pt8 , "k");
+captGraphics(8) = drawLine(pt8 , pt9 , "k");
+captGraphics(9) = drawLine(pt9 , pt10 , "k");
+captGraphics(10) = drawLine(pt1 , pt11 , "k");
+captGraphics(11) = drawLine(pt6 , pt12 , "k");
+captGraphics(12) = drawLine(pt13 , pt14 , "k");
+captGraphics(13) = drawLine(pt15 , pt16 , "k");
 endfunction
 
