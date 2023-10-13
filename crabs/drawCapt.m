@@ -13,8 +13,10 @@ R = getRotation(thetaCapt);
 captRotated = R*capt;
 
 % TODO : Shift the captain from (0 , 0) to (xCapt , yCapt)
+%xCapt
+%yCapt
 T = getTranslation(xCapt,yCapt);
-capt = T*capt;
+capt = T*captRotated;
 
 % Extract the captain points from the captain matrix capt.
 pt1=capt( : , 1);
