@@ -27,10 +27,10 @@ while ( cmd != "Q") % While not quit, read keyboard and respond
 
 cmd = kbhit(); % Read the keyboard.
 
-if( cmd == "w" || cmd == "a" || cmd == "d" ) %Captain has moved. Respond.
+if(cmd == "w" || cmd == "a" || cmd == "d" ) %Captain has moved. Respond.
 
 % erase old captain
-for i=1:length( captGraphics )
+for (i=1:length( captGraphics ))
 set( captGraphics(i), 'Visible', 'off' );
 endfor
 
@@ -44,7 +44,7 @@ elseif (cmd == "i" || cmd == "j" || cmd == "k" || cmd == "l" || cmd ==",") % res
 moved
 
 %erase old crab
-for i=1:length(crabGraphics)
+for (i=1:length(crabGraphics))
 set(crabGraphics(i),'Visible','off');
 endfor
 
@@ -58,6 +58,6 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab)
 endif
 
 endwhile
-
+close all
 
 endfunction
