@@ -14,9 +14,6 @@ yCrab = 1200;
 thetaCrab = -pi/2;
 sizeCrab = 50;
 
-
-
-
 % Draw the captain and initialize graphics handles
 
 captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
