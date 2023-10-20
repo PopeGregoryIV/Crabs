@@ -16,7 +16,7 @@ thetaCapt = theta + dTheta;
 elseif ( cmd == "a" ) %turn left
 xCapt = x;
 yCapt = y;
-thetaCapt = theta - dTheta
+thetaCapt = theta - dTheta;
 
 else % if none of the cases are true, set the new variables equal to the old inputs.
 xCapt = x;
