@@ -12,10 +12,16 @@ sizeCapt = 50;
 xCrab = 1000;
 yCrab = 1200;
 thetaCrab = -pi/2;
-sizeCrab = 50
+sizeCrab = 50;
+
+
+
+
 % Draw the captain and initialize graphics handles
 
 captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
+
+crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
 
 %*********************************************************
 % Put your call to drawCapt() here ..... You must give drawCapt its
@@ -41,7 +47,6 @@ endfor
 captGraphics = drawCapt( xCapt, yCapt, thetaCapt, sizeCapt);
 
 elseif (cmd == "i" || cmd == "j" || cmd == "k" || cmd == "l" || cmd ==",") % respond crab
-moved
 
 %erase old crab
 for (i=1:length(crabGraphics))
