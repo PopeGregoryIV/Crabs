@@ -4,15 +4,25 @@ function crabs ()
 % Draw the game map and initialize map dimensions.
 [mapHeight , mapWidth] = drawMap( "BGImage.png" );
 % Initialize captain location, heading and size
+%capt
 xCapt = 1000;
 yCapt = 500;
 thetaCapt = -pi/2;
 sizeCapt = 50;
+healthCapt = 100;
+crabsCaught = 0;
 
+%crab
 xCrab = 1000;
 yCrab = 1200;
 thetaCrab = -pi/2;
 sizeCrab = 50;
+
+% fish
+xFish = 200;
+yFish = 1200;
+thetaFish = -pi/2;
+sizeFish = 50;
 
 % Draw the captain and initialize graphics handles
 
@@ -20,6 +30,7 @@ captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
 
 crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
 
+fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish);
 %*********************************************************
 % Put your call to drawCapt() here ..... You must give drawCapt its
 % input and output arguments.
@@ -57,6 +68,30 @@ endfor
 crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
 endif
+
+%Capt touches fish
+if (getDistance(xFish,yFish,xCapt,yCapt) < 3*sizeCapt )
+healthCapt = healthCapt - 2;
+
+endif
+
+% print health status
+healthLoc = [100,100];
+crabsCaughtLoc = [100,175];
+healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
+num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
+strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
+
+
+%remove old and plot new health and points status to screen
+delete(healthStatus);
+delete(crabsCaughtStatus);
+healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
+num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2),
+strcat('Crabs Caught = ' ...
+num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 endwhile
 close all
