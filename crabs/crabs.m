@@ -4,6 +4,8 @@ function crabs ()
 % Draw the game map and initialize map dimensions.
 [mapHeight , mapWidth] = drawMap( "BGImage.png" );
 % Initialize captain location, heading and size
+level = 1;
+
 %capt
 xCapt = 1000;
 yCapt = 500;
@@ -19,7 +21,7 @@ thetaCrab = -pi/2;
 sizeCrab = 50;
 
 % fish
-xFish = 200;
+xFish = 50;
 yFish = 1200;
 thetaFish = -pi/2;
 sizeFish = 25;
@@ -43,11 +45,22 @@ num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
 crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
 strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
-cmd = "null"; % initial command
+while(1)
 
-while ( cmd != "Q") % While not quit, read keyboard and respond
+% erase old jellyfish
+for i=1:length(fishGraphics)
+delete(fishGraphics(i));
+endfor
 
-cmd = kbhit(); % Read the keyboard.
+% move jellyfish
+[xFish,yFish,thetaFish] = moveFish(xFish, yFish, thetaFish, sizeFish, mapHeight,mapWidth);
+
+% draw jellyfish
+fishGraphics = drawFish(xFish,yFish,thetaFish,sizeFish);
+cmd = kbhit(1);
+if (cmd == 'Q')
+break;
+endif
 
 if(cmd == "w" || cmd == "a" || cmd == "d" ) %Captain has moved. Respond.
 
@@ -92,6 +105,11 @@ num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
 crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2),
 strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
+
+
+
+fflush(stdout);
+pause(.01)
 endwhile
 close all
 
