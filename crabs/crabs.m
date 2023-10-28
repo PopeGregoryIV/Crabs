@@ -22,7 +22,7 @@ sizeCrab = 50;
 xFish = 200;
 yFish = 1200;
 thetaFish = -pi/2;
-sizeFish = 50;
+sizeFish = 25;
 
 % Draw the captain and initialize graphics handles
 
@@ -34,6 +34,14 @@ fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish);
 %*********************************************************
 % Put your call to drawCapt() here ..... You must give drawCapt its
 % input and output arguments.
+
+% print health status
+healthLoc = [100,100];
+crabsCaughtLoc = [100,175];
+healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
+num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
+strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 cmd = "null"; % initial command
 
@@ -71,17 +79,9 @@ endif
 
 %Capt touches fish
 if (getDistance(xFish,yFish,xCapt,yCapt) < 3*sizeCapt )
-healthCapt = healthCapt - 2;
+healthCapt = healthCapt -2;
 
 endif
-
-% print health status
-healthLoc = [100,100];
-crabsCaughtLoc = [100,175];
-healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
-num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
-crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
-strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 
 %remove old and plot new health and points status to screen
@@ -90,8 +90,7 @@ delete(crabsCaughtStatus);
 healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
 num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
 crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2),
-strcat('Crabs Caught = ' ...
-num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
+strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 endwhile
 close all

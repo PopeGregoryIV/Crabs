@@ -8,8 +8,8 @@ R = getRotation(thetafish);
 fishRotated = R*fish;
 
 
-U = getTranslation(xfish,yfish);
-fish = U*fishRotated;
+P = getTranslation(xfish,yfish);
+fish = P*fishRotated;
 
 %get crab points
 pt1=fish( :, 1);
