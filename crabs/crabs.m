@@ -40,23 +40,23 @@ fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish);
 % print health status
 healthLoc = [100,100];
 crabsCaughtLoc = [100,175];
-healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
-num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
-crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
-strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
+healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 while(1)
 
-% erase old jellyfish
+% erase old fish
 for i=1:length(fishGraphics)
 delete(fishGraphics(i));
 endfor
 
-% move jellyfish
+% move fish
 [xFish,yFish,thetaFish] = moveFish(xFish, yFish, thetaFish, sizeFish, mapHeight,mapWidth);
 
-% draw jellyfish
+% draw fish
 fishGraphics = drawFish(xFish,yFish,thetaFish,sizeFish);
+
+% read keyboard
 cmd = kbhit(1);
 if (cmd == 'Q')
 break;
@@ -100,10 +100,8 @@ endif
 %remove old and plot new health and points status to screen
 delete(healthStatus);
 delete(crabsCaughtStatus);
-healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
-num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
-crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
-strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
+healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 
 

@@ -8,9 +8,11 @@ step = fishMove;
 xFish = x + fishMove;
 yFish = y;
 thetaFish = theta;
-if (x > width-10*size)
-xFish = 0 + 10*size;
-yFish = rand * 1000;
+
+
+if (x > width)
+xFish = size;
+yFish = rand * height;
 thetaFish = theta;
 % set the returned y-value to be size and return a new random x value between 0 and %
 %width
