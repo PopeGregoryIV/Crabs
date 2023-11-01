@@ -23,8 +23,8 @@ sizeCrab = 50;
 % fish
 xFish = 50;
 yFish = 1200;
-thetaFish = -pi/2;
-sizeFish = 25;
+thetaFish = 0;
+sizeFish = 100;
 
 % Draw the captain and initialize graphics handles
 
@@ -102,7 +102,7 @@ delete(healthStatus);
 delete(crabsCaughtStatus);
 healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', ...
 num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
-crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2),
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), ...
 strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
 
 

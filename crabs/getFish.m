@@ -6,8 +6,8 @@ fishPt1 = [ -size; -size; 1];
 fishPt2 = [ 0; 0; 1];
 fishPt3 = [ size/2; -size/2; 1];
 fishPt4 = [ 3*size/2; -size/2; 1];
-%
-fishPt5 = [ 3*size/2; -size/2; 1];
+
+fishPt5 = [ 3*size/2; size/2; 1];
 fishPt6 = [ size/2; size/2; 1];
 fishPt7 = [-size; size; 1];
 

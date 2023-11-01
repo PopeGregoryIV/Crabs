@@ -1,14 +1,14 @@
-function fishGraphics = drawFish (xfish, yfish, thetafish, sizefish)
+function fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish)
 % This function draws the crab by rotating and shifting the crab
 % as it appears in getCrab.m where it is at the origin with zero heading.
 %get crab at the origin
-fish = getFish(sizefish);
+fish = getFish(sizeFish);
 
-R = getRotation(thetafish);
+R = getRotation(thetaFish);
 fishRotated = R*fish;
 
 
-P = getTranslation(xfish,yfish);
+P = getTranslation(xFish,yFish);
 fish = P*fishRotated;
 
 %get crab points
