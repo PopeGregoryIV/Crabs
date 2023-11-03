@@ -1,10 +1,11 @@
-function crabs ()
+function crabs (level)
 % Crabs is a kids computer game where a fisherman, called the captain,
 % hunts for a very clever and powerful crab.
 % Draw the game map and initialize map dimensions.
 [mapHeight , mapWidth] = drawMap( "BGImage.png" );
 % Initialize captain location, heading and size
-level = 1;
+
+numFish = level;
 
 %capt
 xCapt = 1000;
@@ -20,11 +21,12 @@ yCrab = 1200;
 thetaCrab = -pi/2;
 sizeCrab = 50;
 
-% fish
-xFish = 50;
-yFish = 1200;
+%fish
+xFish = 100;
+yFish = rand * mapHeight;
 thetaFish = 0;
-sizeFish = 100;
+sizeFish = 75;
+
 
 % Draw the captain and initialize graphics handles
 
@@ -32,7 +34,10 @@ captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
 
 crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
 
-fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish);
+for k=1:numFish
+fishGraphics(:,k) = drawFish(xFish(k),yFish(k),thetaFish(k),sizeFish);
+endfor
+
 %*********************************************************
 % Put your call to drawCapt() here ..... You must give drawCapt its
 % input and output arguments.
@@ -47,14 +52,14 @@ while(1)
 
 % erase old fish
 for i=1:length(fishGraphics)
-delete(fishGraphics(i));
+set(fishGraphics(i),'Visible','off');
 endfor
 
 % move fish
 [xFish,yFish,thetaFish] = moveFish(xFish, yFish, thetaFish, sizeFish, mapHeight,mapWidth);
 
 % draw fish
-fishGraphics = drawFish(xFish,yFish,thetaFish,sizeFish);
+fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish);
 
 % read keyboard
 cmd = kbhit(1);

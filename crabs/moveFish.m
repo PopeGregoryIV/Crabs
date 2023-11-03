@@ -1,6 +1,6 @@
 function [xFish,yFish,thetaFish] = moveFish( x, y, theta, size, height, width)
 
-fishMove = 50;
+fishMove = 75;
 
 step = fishMove;
 
@@ -10,7 +10,7 @@ yFish = y;
 thetaFish = theta;
 
 
-if (x > width)
+if (x > width - 1.25*size)
 xFish = size;
 yFish = rand * height;
 thetaFish = theta;
