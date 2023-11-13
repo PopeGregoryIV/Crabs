@@ -101,6 +101,14 @@ healthCapt = healthCapt -2;
 
 endif
 
+%capt touches crab
+
+if (getDistance (xCapt, yCapt, xCrab, yCrab) < 3*sizeCapt)
+  crabsCaught = crabsCaught + 1;
+xCrab = rand * 2000;
+yCrab = rand * 1500;
+
+endif
 
 %remove old and plot new health and points status to screen
 delete(healthStatus);
