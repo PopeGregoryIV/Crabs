@@ -22,8 +22,8 @@ thetaCrab = -pi/2;
 sizeCrab = 50;
 
 %fish
-xFish = 100;
-yFish = rand * mapHeight;
+xFish = rand(1,numFish) * mapWidth;
+yFish = rand(1,numFish) * mapHeight;
 thetaFish = 0;
 sizeFish = 75;
 
@@ -35,7 +35,7 @@ captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
 crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
 
 for k=1:numFish
-fishGraphics(:,k) = drawFish(xFish(k),yFish(k),thetaFish(k),sizeFish);
+  fishGraphics(:,k) = drawFish(xFish(k),yFish(k),thetaFish,sizeFish);
 endfor
 
 %*********************************************************
@@ -50,16 +50,20 @@ crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs Cau
 
 while(1)
 
+for k= 1:numFish
+
 % erase old fish
-for i=1:length(fishGraphics)
-set(fishGraphics(i),'Visible','off');
-endfor
+  for i=1:length(fishGraphics(:,k))
+    set(fishGraphics(i,k),'Visible','off');
+  endfor
 
 % move fish
-[xFish,yFish,thetaFish] = moveFish(xFish, yFish, thetaFish, sizeFish, mapHeight,mapWidth);
+  [xFish(k),yFish(k),thetaFish] = moveFish(xFish(k), yFish(k), thetaFish, sizeFish, mapHeight,mapWidth);
 
 % draw fish
-fishGraphics = drawFish (xFish, yFish, thetaFish, sizeFish);
+  fishGraphics(:,k)  = drawFish (xFish(k), yFish(k), thetaFish, sizeFish);
+
+endfor
 
 % read keyboard
 cmd = kbhit(1);
@@ -71,7 +75,7 @@ if(cmd == "w" || cmd == "a" || cmd == "d" ) %Captain has moved. Respond.
 
 % erase old captain
 for (i=1:length( captGraphics ))
-set( captGraphics(i), 'Visible', 'off' );
+  set( captGraphics(i), 'Visible', 'off' );
 endfor
 
 % move capt
@@ -84,7 +88,7 @@ elseif (cmd == "i" || cmd == "j" || cmd == "k" || cmd == "l" || cmd ==",") % res
 
 %erase old crab
 for (i=1:length(crabGraphics))
-set(crabGraphics(i),'Visible','off');
+  set(crabGraphics(i),'Visible','off');
 endfor
 
 %move crab
@@ -95,19 +99,29 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
 endif
 
-%Capt touches fish
-if (getDistance(xFish,yFish,xCapt,yCapt) < 3*sizeCapt )
-healthCapt = healthCapt -2;
+for k= 1:numFish
 
-endif
+  %Capt touches fish
+  if (getDistance(xFish(k),yFish(k),xCapt,yCapt) < 3*sizeCapt )
+    healthCapt = healthCapt -2;
+  endif
+
+endfor
 
 %capt touches crab
 
 if (getDistance (xCapt, yCapt, xCrab, yCrab) < 3*sizeCapt)
   crabsCaught = crabsCaught + 1;
-xCrab = rand * 2000;
-yCrab = rand * 1500;
+  xCrab = rand * 2000;
+  yCrab = rand * 1500;
 
+  for (i=1:length(crabGraphics))
+    set(crabGraphics(i),'Visible','off');
+  endfor
+
+  [xCrab,yCrab,thetaCrab] = moveCrab(cmd,xCrab,yCrab,thetaCrab,sizeCrab, mapHeight, mapWidth);
+
+  crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
 endif
 
 %remove old and plot new health and points status to screen
