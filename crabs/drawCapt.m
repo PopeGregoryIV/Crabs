@@ -1,4 +1,4 @@
-function captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt)
+function [captGraphics,xSpear,ySpear] = drawCapt (xCapt, yCapt, thetaCapt, sizeCapt)
 % In the future, this function will draw the captain at the given
 % position (xCapt , yCapt) , with heading thetaCapt.
 % For now, it draws the captain at the (0, 0) with 0 heading.
@@ -17,6 +17,11 @@ captRotated = R*capt;
 %yCapt
 T = getTranslation(xCapt,yCapt);
 capt = T*captRotated;
+
+pt16=capt(:,16);
+xSpear = pt16(1);
+ySpear = pt16(2);
+
 
 % Extract the captain points from the captain matrix capt.
 pt1=capt( : , 1);

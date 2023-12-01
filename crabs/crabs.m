@@ -15,6 +15,8 @@ sizeCapt = 50;
 healthCapt = 100;
 crabsCaught = 0;
 
+
+
 %crab
 xCrab = 1000;
 yCrab = 1200;
@@ -30,7 +32,7 @@ sizeFish = 75;
 
 % Draw the captain and initialize graphics handles
 
-captGraphics = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
+[captGraphics,xSpear,ySpear] = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
 
 crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
 
@@ -82,14 +84,14 @@ endfor
 [xCapt, yCapt, thetaCapt] = moveCapt(cmd, xCapt, yCapt, thetaCapt);
 
 % draw new capt
-captGraphics = drawCapt( xCapt, yCapt, thetaCapt, sizeCapt);
+[captGraphics,xSpear,ySpear] = drawCapt( xCapt, yCapt, thetaCapt, sizeCapt);
 
-elseif (cmd == "i" || cmd == "j" || cmd == "k" || cmd == "l" || cmd ==",") % respond crab
+  elseif (cmd == "i" || cmd == "j" || cmd == "k" || cmd == "l" || cmd ==",") % respond crab
 
 %erase old crab
-for (i=1:length(crabGraphics))
-  set(crabGraphics(i),'Visible','off');
-endfor
+    for (i=1:length(crabGraphics))
+     set(crabGraphics(i),'Visible','off');
+    endfor
 
 %move crab
 [xCrab,yCrab,thetaCrab] = moveCrab(cmd,xCrab,yCrab,thetaCrab,sizeCrab, mapHeight, mapWidth);
@@ -97,32 +99,38 @@ endfor
 %draw new captain and crab
 crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
-endif
+  endif
 
-for k= 1:numFish
+  for k= 1:numFish
 
   %Capt touches fish
   if (getDistance(xFish(k),yFish(k),xCapt,yCapt) < 3*sizeCapt )
     healthCapt = healthCapt -2;
   endif
 
-endfor
+  endfor
 
+  %crab touches fish
+
+  if (getDistance (xCrab, yCrab, xFish(k), yFish(k)) < 3*sizeCrab)
+      numFish = numFish + 1
+
+  endif
 %capt touches crab
 
-if (getDistance (xCapt, yCapt, xCrab, yCrab) < 3*sizeCapt)
-  crabsCaught = crabsCaught + 1;
-  xCrab = rand * 2000;
-  yCrab = rand * 1500;
+  if (getDistance (xSpear, ySpear, xCrab, yCrab) < 3*sizeCapt)
+    crabsCaught = crabsCaught + 1;
+    xCrab = rand * 2000;
+    yCrab = rand * 1500;
 
-  for (i=1:length(crabGraphics))
-    set(crabGraphics(i),'Visible','off');
-  endfor
+    for (i=1:length(crabGraphics))
+      set(crabGraphics(i),'Visible','off');
+    endfor
 
   [xCrab,yCrab,thetaCrab] = moveCrab(cmd,xCrab,yCrab,thetaCrab,sizeCrab, mapHeight, mapWidth);
 
   crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
-endif
+  endif
 
 %remove old and plot new health and points status to screen
 delete(healthStatus);

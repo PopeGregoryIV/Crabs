@@ -17,10 +17,10 @@ captPt10 = [ captSize; captSize/2; 1];
 captPt11 = [ 0; 2*captSize; 1]; %left
 captPt12 = [ 0; -2*captSize; 1]; %right
 %spear
-captPt13=[ 4*captSize; -2*captSize; 1];
+captPt13=[ 5*captSize; -2*captSize; 1];
 captPt14=[ -captSize; -2*captSize; 1];
 captPt15=[ -2*captSize; 2*captSize; 1]; % second spear end
-captPt16=[ 4*captSize; 2*captSize; 1]; %second spear point
+captPt16=[ 5*captSize; 2*captSize; 1]; %second spear point
 
 capt = [ captPt1, captPt2, captPt3, captPt4, captPt5, captPt6, captPt7, ...
 captPt8, captPt9, captPt10, captPt11, captPt12, captPt13, captPt14, ...
