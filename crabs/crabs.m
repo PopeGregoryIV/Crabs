@@ -6,6 +6,7 @@ function crabs (level)
 % Initialize captain location, heading and size
 
 numFish = level;
+maxFish = 20;
 
 %capt
 xCapt = 1000;
@@ -24,11 +25,11 @@ thetaCrab = -pi/2;
 sizeCrab = 50;
 
 %fish
-xFish = rand(1,numFish) * mapWidth;
-yFish = rand(1,numFish) * mapHeight;
+xFish = rand(1,maxFish) * mapWidth;
+yFish = rand(1,maxFish) * mapHeight;
 thetaFish = 0;
 sizeFish = 75;
-
+fishGraphics = zeros(8,maxFish);
 
 % Draw the captain and initialize graphics handles
 
@@ -113,8 +114,10 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
   %crab touches fish
 
   if (getDistance (xCrab, yCrab, xFish(k), yFish(k)) < 3*sizeCrab)
-      numFish = numFish + 1
-
+      numFish = numFish + 1;
+      if (numFish > maxFish)
+        numFish = maxFish;
+      endif
   endif
 %capt touches crab
 
