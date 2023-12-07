@@ -8,6 +8,9 @@ function crabs (level)
 numFish = level;
 maxFish = 20;
 
+xCenter = mapWidth * 0.5;
+yCenter = mapHeight * 0.5;
+
 %capt
 xCapt = 1000;
 yCapt = 500;
@@ -134,6 +137,31 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
   crabGraphics = drawCrab (xCrab, yCrab, thetaCrab, sizeCrab);
   endif
+
+if isOnMap(xCapt,yCapt,mapWidth,mapHeight,100) == 0
+
+ thetaCapt = thetaCapt + pi;
+endif
+
+if isOnMap(xCrab,yCrab,mapWidth,mapHeight,100) == 0
+   xChange = difference (xCrab, xCenter );
+
+    yChange = difference (yCrab, yCenter );
+
+     if xChange < 0
+       xCrab = xCrab - 150;
+
+       else
+         xCrab = xCrab + 150;
+     endif
+
+     if yChange < 0
+       yCrab = yCrab - 150;
+
+       else
+         yCrab = yCrab + 150;
+     endif
+endif
 
 %remove old and plot new health and points status to screen
 delete(healthStatus);
