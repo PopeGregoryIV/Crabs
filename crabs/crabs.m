@@ -1,7 +1,15 @@
-function crabs (level)
+function crabs ()
 % Crabs is a kids computer game where a fisherman, called the captain,
 % hunts for a very clever and powerful crab.
 % Draw the game map and initialize map dimensions.
+
+playGame = 1;
+while(playGame)
+  %draw start screen
+    level = drawStartScreen("startScreen.png");
+
+    while(1)
+
 [mapHeight , mapWidth] = drawMap( "BGImage.png" );
 % Initialize captain location, heading and size
 
@@ -73,7 +81,7 @@ endfor
 
 % read keyboard
 cmd = kbhit(1);
-if (cmd == 'Q')
+if (cmd == 'Q' || healthCapt < 0 || crabsCaught == numCrabs )
 break;
 endif
 
@@ -109,7 +117,7 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
   %Capt touches fish
   if (getDistance(xFish(k),yFish(k),xCapt,yCapt) < 3*sizeCapt )
-    healthCapt = healthCapt -2;
+    healthCapt = healthCapt -4;
   endif
 
   endfor
@@ -174,7 +182,16 @@ crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs Cau
 
 fflush(stdout);
 pause(.01)
-endwhile
+    endwhile
 close all
+
+   endwhile
+  %draw end screen
+    playGame = drawEndScreen("endScreen.png",crabsCaught,numCrabs);
+
+ endwhile
+
+close all
+clear
 
 endfunction
