@@ -81,7 +81,7 @@ endfor
 
 % read keyboard
 cmd = kbhit(1);
-if (cmd == 'Q' || healthCapt < 0 || crabsCaught == numCrabs )
+if (cmd == 'Q' || healthCapt < 1)
 break;
 endif
 
@@ -117,7 +117,7 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
   %Capt touches fish
   if (getDistance(xFish(k),yFish(k),xCapt,yCapt) < 3*sizeCapt )
-    healthCapt = healthCapt -4;
+    healthCapt = healthCapt -20;
   endif
 
   endfor
