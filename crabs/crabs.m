@@ -13,8 +13,9 @@ while(playGame)
 [mapHeight , mapWidth] = drawMap( "BGImage.png" );
 % Initialize captain location, heading and size
 
-numFish = level;
+numFish = 3;
 maxFish = 20;
+maxJelly = 2;
 
 xCenter = mapWidth * 0.5;
 yCenter = mapHeight * 0.5;
@@ -25,7 +26,7 @@ yCapt = 500;
 thetaCapt = -pi/2;
 sizeCapt = 50;
 healthCapt = 100;
-crabsCaught = 0;
+crabsLeft = level;
 
 
 
@@ -42,6 +43,14 @@ thetaFish = 0;
 sizeFish = 75;
 fishGraphics = zeros(8,maxFish);
 
+%jelly
+xJelly = rand(1,maxJelly) * mapWidth;
+yJelly = rand(1,maxJelly) * mapHeight;
+thetaJelly = -pi/2;
+sizeJelly = 50;
+numJelly= 2;
+
+
 % Draw the captain and initialize graphics handles
 
 [captGraphics,xSpear,ySpear] = drawCapt (xCapt , yCapt , thetaCapt , sizeCapt);
@@ -52,6 +61,10 @@ for k=1:numFish
   fishGraphics(:,k) = drawFish(xFish(k),yFish(k),thetaFish,sizeFish);
 endfor
 
+for a=1:numJelly
+  jellyGraphics(:,a) = drawJelly(xJelly(a),yJelly(a),thetaJelly,sizeJelly);
+endfor
+
 %*********************************************************
 % Put your call to drawCapt() here ..... You must give drawCapt its
 % input and output arguments.
@@ -60,13 +73,29 @@ endfor
 healthLoc = [100,100];
 crabsCaughtLoc = [100,175];
 healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
-crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs left = ',num2str(crabsLeft)), 'FontSize', 12, 'Color', 'red');
 
 while(1)
 
+
+for a = 1:numJelly
+
+% erase old jelly
+  for b=1:length(jellyGraphics(:,a))
+    set(jellyGraphics(b,a),'Visible','off');
+  endfor
+
+% move jelly
+  [xJelly(a),yJelly(a),thetaJelly] = moveJelly(xJelly(a), yJelly(a), thetaJelly, sizeJelly, mapHeight, mapWidth);
+
+% draw jelly
+  jellyGraphics(:,a)  = drawJelly (xJelly(a), yJelly(a), thetaJelly, sizeJelly);
+
+endfor
+
 for k= 1:numFish
 
-% erase old fish
+% erase old jelly
   for i=1:length(fishGraphics(:,k))
     set(fishGraphics(i,k),'Visible','off');
   endfor
@@ -79,9 +108,11 @@ for k= 1:numFish
 
 endfor
 
+
+
 % read keyboard
 cmd = kbhit(1);
-if (cmd == 'Q' || healthCapt < 1)
+if (cmd == 'Q' || healthCapt < 1||crabsLeft == 0)
 break;
 endif
 
@@ -117,7 +148,7 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
 
   %Capt touches fish
   if (getDistance(xFish(k),yFish(k),xCapt,yCapt) < 3*sizeCapt )
-    healthCapt = healthCapt -20;
+    healthCapt = healthCapt -4;
   endif
 
   endfor
@@ -130,10 +161,16 @@ crabGraphics = drawCrab(xCrab,yCrab,thetaCrab,sizeCrab);
         numFish = maxFish;
       endif
   endif
+
+ %capt touches jelly
+    if (getDistance (xCapt, yCapt, xJelly(a), yJelly(a)) < 3*sizeCrab)
+       healthCapt = healthCapt -8;
+    endif
+
 %capt touches crab
 
   if (getDistance (xSpear, ySpear, xCrab, yCrab) < 3*sizeCapt)
-    crabsCaught = crabsCaught + 1;
+    crabsLeft = crabsLeft - 1;
     xCrab = rand * 2000;
     yCrab = rand * 1500;
 
@@ -175,7 +212,7 @@ endif
 delete(healthStatus);
 delete(crabsCaughtStatus);
 healthStatus = text(healthLoc(1), healthLoc(2), strcat('Health = ', num2str(healthCapt)), 'FontSize', 12, 'Color', 'red');
-crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs Caught = ',num2str(crabsCaught)), 'FontSize', 12, 'Color', 'red');
+crabsCaughtStatus = text(crabsCaughtLoc(1), crabsCaughtLoc(2), strcat('Crabs left = ',num2str(crabsLeft)), 'FontSize', 12, 'Color', 'red');
 
 
 
